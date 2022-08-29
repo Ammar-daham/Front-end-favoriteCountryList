@@ -1,38 +1,17 @@
-import { createStore, compose } from 'redux'
+import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
+import counterReducer from './slices/countriesSlice'
 
-import { AppState } from '../types'
-import createRootReducer from './reducers'
-
-const initState: AppState = {
-  product: {
-    inCart: [],
+export const store = configureStore({
+  reducer: {
+    countries: counterReducer,
   },
-  ui: {
-    dialogOpen: {},
-  },
-}
+})
 
-export default function makeStore(initialState = initState) {
-  let composeEnhancers = compose
-
-  if (process.env.NODE_ENV === 'development') {
-    if ((window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
-      composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    }
-  }
-
-  const store = createStore(
-    createRootReducer(),
-    initialState,
-    composeEnhancers()
-  )
-
-  if ((module as any).hot) {
-    ;(module as any).hot.accept('./reducers', () => {
-      const nextReducer = require('./reducers').default
-      store.replaceReducer(nextReducer)
-    })
-  }
-
-  return store
-}
+export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>

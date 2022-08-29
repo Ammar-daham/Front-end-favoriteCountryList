@@ -1,27 +1,25 @@
 import React, { useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import Button from '@mui/material/Button'
+import { countriesFetch } from '../redux/slices/countriesSlice'
 
-import { Product, AppState } from '../types'
-import { addProduct, removeProduct } from '../redux/actions'
 import { AppTheme } from '../context/AppTheme'
 import ThemeContext from '../context/themeProvider'
-
-const names = ['Apple', 'Orange', 'Avocado', 'Banana', 'Cucumber', 'Carrot']
+import { AppDispatch, RootState } from '../redux/store'
 
 export default function Home() {
-  const dispatch = useDispatch()
-  const products = useSelector((state: AppState) => state.product.inCart)
+  const dispatch = useDispatch<AppDispatch>()
+  const state = useSelector((state: RootState) => state)
+  console.log('state', state)
+  // const products = useSelector((state: AppState) => state.product.inCart)
 
-  const handleAddProduct = () => {
-    const product: Product = {
-      id: (+new Date()).toString(),
-      name: names[Math.floor(Math.random() * names.length)],
-      price: +(Math.random() * 10).toFixed(2),
-    }
-    dispatch(addProduct(product))
-  }
+  // const handleAddProduct = () => {
+  //   const product: Product = {
+  //     id: (+new Date()).toString(),
+  //     name: names[Math.floor(Math.random() * names.length)],
+  //     price: +(Math.random() * 10).toFixed(2),
+  //   }
+  //   dispatch(addProduct(product))
+  // }
 
   const { theme } = useContext(ThemeContext)
 
@@ -49,7 +47,7 @@ export default function Home() {
     <>
       <div style={themeStyle}>
         <h1>Home page</h1>
-        {products.length <= 0 && <div>No products in cart</div>}
+        {/* {products.length <= 0 && <div>No products in cart</div>}
         <ul>
           {products.map((p) => (
             <li key={p.id}>
@@ -66,7 +64,8 @@ export default function Home() {
         </ul>
         <Button onClick={handleAddProduct} variant="contained">
           Add product
-        </Button>
+        </Button> */}
+        <button onClick={() => dispatch(countriesFetch())}>Click Me</button>
       </div>
     </>
   )
