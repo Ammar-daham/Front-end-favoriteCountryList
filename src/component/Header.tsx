@@ -12,11 +12,11 @@ const Header = () => {
 
   const headerStyle: AppTheme = {
     dark: {
-      background: 'black',
+      background: '#3700B3',
       color: 'white',
     },
     light: {
-      background: 'white',
+      background: '#BB86FC',
       color: 'black',
     },
     common: {
@@ -40,11 +40,7 @@ const Header = () => {
           <IconButton size="large" edge="start" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Switch
-            checkedIcon={false}
-            onChange={handleThemeToggle}
-            checked={theme === 'light'}
-          />
+          <Switch onChange={handleThemeToggle} checked={theme === 'light'} />
         </Toolbar>
       </AppBar>
     </>

@@ -10,8 +10,8 @@ export default function App() {
     <>
       <ThemeContext.Provider value={{ theme, setTheme }}>
         <Header />
+        <Routes />
       </ThemeContext.Provider>
-      <Routes />
     </>
   )
 }
