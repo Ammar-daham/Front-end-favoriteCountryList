@@ -8,22 +8,21 @@ import {
   IconButton,
   Box,
 } from '@mui/material'
-
+import ShoppingCartTwoToneIcon from '@mui/icons-material/ShoppingCartTwoTone'
 import MenuIcon from '@mui/icons-material/Menu'
 import { AppTheme } from '../context/AppTheme'
 import SearchAppBar from './Search'
-import ShoppingBasket from './ShoppingBasket'
 
 const Header = () => {
   const { theme, setTheme } = useContext(ThemeContext)
 
   const headerStyle: AppTheme = {
     dark: {
-      background: '#3700B3',
+      background: '#3f51b5',
       color: 'white',
     },
     light: {
-      background: '#BB86FC',
+      background: '#03a9f4',
       color: 'black',
     },
     common: {
@@ -45,7 +44,7 @@ const Header = () => {
       <AppBar position="static" style={themeStyle} sx={{ padding: 1 }}>
         <Toolbar>
           <IconButton size="large" edge="start" aria-label="menu">
-            <MenuIcon />
+            <MenuIcon style={themeStyle} />
           </IconButton>
           <Typography
             variant="h6"
@@ -56,7 +55,14 @@ const Header = () => {
             Countries
           </Typography>
           <SearchAppBar />
-          <ShoppingBasket />
+          <IconButton
+            size="large"
+            edge="start"
+            aria-label="menu"
+            sx={{ margin: 1 }}
+          >
+            <ShoppingCartTwoToneIcon style={themeStyle} />
+          </IconButton>
           <Switch onChange={handleThemeToggle} checked={theme === 'light'} />
         </Toolbar>
       </AppBar>
