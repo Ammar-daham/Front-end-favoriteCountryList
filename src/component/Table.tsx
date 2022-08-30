@@ -28,27 +28,31 @@ export const CountriesTable = () => {
           <TableHead>
             <TableRow>
               <TableCell>Flags</TableCell>
-              <TableCell align="right">Name</TableCell>
-              <TableCell align="right">Capital</TableCell>
-              <TableCell align="right">Languages</TableCell>
-              <TableCell align="right">Population</TableCell>
-              <TableCell align="right">Region</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Capital</TableCell>
+              <TableCell>Languages</TableCell>
+              <TableCell>Population</TableCell>
+              <TableCell>Region</TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
             {countries.items.map((country) => (
               <TableRow key={country.name.common}>
-                <TableCell component="th" scope="row">
+                <TableCell component="th" scope="row" style={{ fontSize: 40 }}>
                   {Object.values(country.flag)}
                 </TableCell>
-                <TableCell align="right">{country.name.common}</TableCell>
-                <TableCell align="right">{country.capital[0]}</TableCell>
-                <TableCell align="right">
-                  {Object.values(country.languages).map((language) => language)}
+                <TableCell>{country.name.common}</TableCell>
+                <TableCell>{country.capital[0]}</TableCell>
+                <TableCell>
+                  <ul style={{ paddingLeft: 15 }}>
+                    {Object.values(country.languages).map((language) => (
+                      <li>{language}</li>
+                    ))}
+                  </ul>
                 </TableCell>
-                <TableCell align="right">{country.population}</TableCell>
-                <TableCell align="right">{country.region}</TableCell>
+                <TableCell>{country.population}</TableCell>
+                <TableCell>{country.region}</TableCell>
               </TableRow>
             ))}
           </TableBody>
