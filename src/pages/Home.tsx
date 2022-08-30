@@ -1,15 +1,12 @@
 import React, { useContext } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { countriesFetch } from '../redux/slices/countriesSlice'
 
 import { AppTheme } from '../context/AppTheme'
 import ThemeContext from '../context/themeProvider'
-import { AppDispatch, RootState } from '../redux/store'
+
+import { CountriesTable } from '../component/Table'
 
 export default function Home() {
-  const dispatch = useDispatch<AppDispatch>()
-  const state = useSelector((state: RootState) => state)
-  console.log('state', state)
+  // console.log('state', state)
   // const products = useSelector((state: AppState) => state.product.inCart)
 
   // const handleAddProduct = () => {
@@ -47,25 +44,7 @@ export default function Home() {
     <>
       <div style={themeStyle}>
         <h1>Home page</h1>
-        {/* {products.length <= 0 && <div>No products in cart</div>}
-        <ul>
-          {products.map((p) => (
-            <li key={p.id}>
-              <Link to={`/products/${p.id}`}>{`${p.name} - $${p.price}`}</Link>
-              <Button
-                variant="outlined"
-                color="error"
-                onClick={() => dispatch(removeProduct(p))}
-              >
-                Remove
-              </Button>
-            </li>
-          ))}
-        </ul>
-        <Button onClick={handleAddProduct} variant="contained">
-          Add product
-        </Button> */}
-        <button onClick={() => dispatch(countriesFetch())}>Click Me</button>
+        <CountriesTable />
       </div>
     </>
   )
