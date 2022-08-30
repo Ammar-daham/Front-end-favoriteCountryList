@@ -11,6 +11,7 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Button,
 } from '@mui/material'
 
 export const CountriesTable = () => {
@@ -24,7 +25,7 @@ export const CountriesTable = () => {
   return (
     <>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 700 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Flags</TableCell>
@@ -38,7 +39,7 @@ export const CountriesTable = () => {
 
           <TableBody>
             {countries.items.map((country) => (
-              <TableRow key={country.name.common}>
+              <TableRow key={country.name.common} hover>
                 <TableCell component="th" scope="row" style={{ fontSize: 40 }}>
                   {Object.values(country.flag)}
                 </TableCell>
@@ -53,6 +54,9 @@ export const CountriesTable = () => {
                 </TableCell>
                 <TableCell>{country.population}</TableCell>
                 <TableCell>{country.region}</TableCell>
+                <TableCell>
+                  <Button variant="contained">Add</Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

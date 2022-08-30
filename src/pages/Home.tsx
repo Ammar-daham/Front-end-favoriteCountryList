@@ -43,7 +43,6 @@ export default function Home() {
   return (
     <>
       <div style={themeStyle}>
-        <h1>Home page</h1>
         <CountriesTable />
       </div>
     </>
