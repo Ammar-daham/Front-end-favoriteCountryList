@@ -9,6 +9,9 @@ import {
   Box,
 } from '@mui/material'
 import ShoppingCartTwoToneIcon from '@mui/icons-material/ShoppingCartTwoTone'
+import LightModeIcon from '@mui/icons-material/LightMode'
+import DarkModeIcon from '@mui/icons-material/DarkMode'
+
 import MenuIcon from '@mui/icons-material/Menu'
 import { AppTheme } from '../context/AppTheme'
 import SearchAppBar from './Search'
@@ -59,11 +62,13 @@ const Header = () => {
             size="large"
             edge="start"
             aria-label="menu"
-            sx={{ margin: 1 }}
+            sx={{ margin: 2 }}
           >
             <ShoppingCartTwoToneIcon style={themeStyle} />
           </IconButton>
+          <DarkModeIcon />
           <Switch onChange={handleThemeToggle} checked={theme === 'light'} />
+          <LightModeIcon />
         </Toolbar>
       </AppBar>
     </Box>
