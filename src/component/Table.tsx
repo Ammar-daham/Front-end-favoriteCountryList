@@ -1,9 +1,10 @@
 import React, { useEffect, useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { countriesFetch } from '../redux/slices/countriesSlice'
+import { countriesFetch, handleSearchBy } from '../redux/slices/countriesSlice'
 import { AppDispatch, RootState } from '../redux/store'
 import { AppTheme } from '../context/AppTheme'
 import ThemeContext from '../context/themeProvider'
+import { useHistory } from 'react-router-dom'
 
 import {
   Table,
@@ -19,6 +20,12 @@ import {
 export const CountriesTable = () => {
   const dispatch = useDispatch<AppDispatch>()
   const { countries } = useSelector((state: RootState) => state)
+
+  const history = useHistory()
+  const handleRowClick = (country: any) => {
+    history.push(`/products/${country.name.common}`)
+    dispatch(handleSearchBy(country.name.common))
+  }
 
   useEffect(() => {
     dispatch(countriesFetch())
@@ -79,15 +86,14 @@ export const CountriesTable = () => {
           </TableRow>
         </TableHead>
 
-        <TableBody>
+        <TableBody style={bodyThemeStyle}>
           {countries.items.map((country) => (
-            <TableRow key={country.name.common} hover>
-              <TableCell
-                component="th"
-                scope="row"
-                sx={{ fontSize: 40 }}
-                style={bodyThemeStyle}
-              >
+            <TableRow
+              key={country.name.common}
+              onClick={() => handleRowClick(country)}
+              hover
+            >
+              <TableCell sx={{ fontSize: 40 }}>
                 {Object.values(country.flag)}
               </TableCell>
               <TableCell style={bodyThemeStyle}>

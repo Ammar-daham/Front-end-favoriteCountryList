@@ -16,26 +16,12 @@ const initialState: countriesState = {
   error: '',
 }
 
-// const init = {
-//   name: {
-//     common: ''
-//   },
-//   capital: [],
-//   languages: {
-
-//   },
-//   population: 0,
-//   region: '',
-//   flag: ''
-// }
-
 export const countriesFetch = createAsyncThunk(
   'countries/fetchCountries',
   async () => {
-    const url = `https://restcountries.com/v3.1/all?fields=name,languages,capital,flag,population,region`
+    const url = `https://restcountries.com/v3.1/all?fields=name,languages,capital,flag,population,region,area`
 
     const response = await axios.get(url)
-    //console.log('response: ', response)
     return {
       data: response.data,
       status: response.status,
@@ -57,7 +43,6 @@ export const countriesSlice = createSlice({
         }
         return false
       })
-      console.log('filter', filteredCountries)
       state.items = filteredCountries
     },
   },

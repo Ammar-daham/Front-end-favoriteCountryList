@@ -20,6 +20,7 @@ export type Country = {
   population: number
   region: string
   flag: string
+  area: number
 }
 
 // A product

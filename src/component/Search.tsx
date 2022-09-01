@@ -48,7 +48,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }))
 
-const SearchAppBar = (props: any) => {
+const SearchAppBar = () => {
   const dispatch = useDispatch<AppDispatch>()
 
   const handleChange = (e: any) => {
@@ -63,7 +63,6 @@ const SearchAppBar = (props: any) => {
       <StyledInputBase
         placeholder="Search…"
         inputProps={{ 'aria-label': 'search' }}
-        value={props.inputValue}
         onChange={handleChange}
       />
     </Search>
