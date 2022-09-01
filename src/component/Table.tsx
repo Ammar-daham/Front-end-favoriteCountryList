@@ -75,7 +75,7 @@ export const CountriesTable = () => {
             <TableCell style={bodyThemeStyle}>Languages</TableCell>
             <TableCell style={bodyThemeStyle}>Population</TableCell>
             <TableCell style={bodyThemeStyle}>Region</TableCell>
-            <TableCell style={bodyThemeStyle}>Add to Card</TableCell>
+            <TableCell style={bodyThemeStyle}>Actions</TableCell>
           </TableRow>
         </TableHead>
 

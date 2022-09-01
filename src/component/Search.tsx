@@ -1,7 +1,10 @@
-import * as React from 'react'
+import React from 'react'
 import { styled, alpha } from '@mui/material/styles'
 import InputBase from '@mui/material/InputBase'
 import SearchIcon from '@mui/icons-material/Search'
+import { AppDispatch } from '../redux/store'
+import { useDispatch } from 'react-redux'
+import { handleSearchBy } from '../redux/slices/countriesSlice'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -45,7 +48,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }))
 
-const SearchAppBar = () => {
+const SearchAppBar = (props: any) => {
+  const dispatch = useDispatch<AppDispatch>()
+
+  const handleChange = (e: any) => {
+    dispatch(handleSearchBy(e.target.value))
+  }
+
   return (
     <Search>
       <SearchIconWrapper>
@@ -54,6 +63,8 @@ const SearchAppBar = () => {
       <StyledInputBase
         placeholder="Search…"
         inputProps={{ 'aria-label': 'search' }}
+        value={props.inputValue}
+        onChange={handleChange}
       />
     </Search>
   )

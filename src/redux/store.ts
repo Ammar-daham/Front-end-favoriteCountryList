@@ -1,9 +1,9 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import counterReducer from './slices/countriesSlice'
+import countryReducer from './slices/countriesSlice'
 
 export const store = configureStore({
   reducer: {
-    countries: counterReducer,
+    countries: countryReducer,
   },
 })
 
