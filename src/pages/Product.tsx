@@ -1,14 +1,56 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
+import ThemeContext from '../context/themeProvider'
 
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
+import { AppTheme } from '../context/AppTheme'
 
 export default function Product() {
+  const { theme } = useContext(ThemeContext)
+
+  const bodyStyle: AppTheme = {
+    dark: {
+      background: '#37474F',
+      color: 'white',
+    },
+    light: {
+      background: '#F5F5F5',
+      color: '#222222',
+    },
+    common: {
+      transition: 'all 1s ease',
+    },
+  }
+
+  const buttonStyle: AppTheme = {
+    dark: {
+      background: '#3f51b5',
+      color: 'white',
+    },
+    light: {
+      background: '#03a9f4',
+      color: 'black',
+    },
+    common: {
+      transition: 'all 1s ease',
+    },
+  }
+
+  const buttonThemeStyle = {
+    ...buttonStyle.common,
+    ...(theme === 'light' ? buttonStyle.light : buttonStyle.dark),
+  }
+
+  const bodyThemeStyle = {
+    ...bodyStyle.common,
+    ...(theme === 'light' ? bodyStyle.light : bodyStyle.dark),
+  }
+
   const country = useSelector((state: RootState) =>
     state.countries.items.find((p) => {
       return p
@@ -21,9 +63,9 @@ export default function Product() {
 
   return (
     <>
-      <Card sx={{ minWidth: 275, alignItems: 'center' }}>
+      <Card sx={{ minWidth: 275, alignItems: 'center' }} style={bodyThemeStyle}>
         <CardContent>
-          <Typography variant="h4" color="text.secondary" gutterBottom>
+          <Typography variant="h4" gutterBottom>
             {country.name.common} {country.flag}
           </Typography>
           <Typography>Capital: {country.capital}</Typography>
@@ -38,7 +80,9 @@ export default function Product() {
           </ul>
         </CardContent>
         <CardActions>
-          <Button size="small">Add To Card</Button>
+          <Button size="small" style={buttonThemeStyle}>
+            Add To Card
+          </Button>
         </CardActions>
       </Card>
     </>
