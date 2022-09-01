@@ -30,23 +30,17 @@ export default function Product() {
           Population: {country.population}
           <Typography variant="body2">Region: {country.region}</Typography>
           <Typography variant="body2">Area: {country.area}</Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            <ul style={{ paddingLeft: 15 }}>
-              Languages:
-              {Object.values(country.languages).map((language) => (
-                <li>{language}</li>
-              ))}
-            </ul>
-          </Typography>
+          <ul style={{ paddingLeft: 15 }}>
+            <Typography>Languages:</Typography>
+            {Object.values(country.languages).map((language) => (
+              <li key={language}>{language}</li>
+            ))}
+          </ul>
         </CardContent>
         <CardActions>
           <Button size="small">Add To Card</Button>
         </CardActions>
       </Card>
     </>
-    // <>
-    //   <h1>Product page</h1>
-    //   <h2>{`${product.name.common} - ${product.flag}`}</h2>
-    // </>
   )
 }

@@ -103,7 +103,7 @@ export const CountriesTable = () => {
               <TableCell style={bodyThemeStyle}>
                 <ul style={{ paddingLeft: 15 }}>
                   {Object.values(country.languages).map((language) => (
-                    <li>{language}</li>
+                    <li key={language}>{language}</li>
                   ))}
                 </ul>
               </TableCell>
