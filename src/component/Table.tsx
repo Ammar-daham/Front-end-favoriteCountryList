@@ -1,6 +1,10 @@
 import React, { useEffect, useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { countriesFetch, handleSearchBy } from '../redux/slices/countriesSlice'
+import {
+  addToCart,
+  countriesFetch,
+  handleSearchBy,
+} from '../redux/slices/countriesSlice'
 import { AppDispatch, RootState } from '../redux/store'
 import { AppTheme } from '../context/AppTheme'
 import ThemeContext from '../context/themeProvider'
@@ -16,6 +20,7 @@ import {
   Paper,
   Button,
 } from '@mui/material'
+//import { addToCart } from '../redux/slices/cartSlice'
 
 export const CountriesTable = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -25,6 +30,10 @@ export const CountriesTable = () => {
   const handleRowClick = (country: any) => {
     history.push(`/products/${country.name.common}`)
     dispatch(handleSearchBy(country.name.common))
+  }
+
+  const handleAddToCart = (product: object) => {
+    dispatch(addToCart(product))
   }
 
   useEffect(() => {
@@ -73,7 +82,7 @@ export const CountriesTable = () => {
 
   return (
     <TableContainer component={Paper} style={bodyThemeStyle}>
-      <Table aria-label="simple table">
+      <Table aria-label="countries">
         <TableHead>
           <TableRow>
             <TableCell style={bodyThemeStyle}>Flags</TableCell>
@@ -88,12 +97,11 @@ export const CountriesTable = () => {
 
         <TableBody style={bodyThemeStyle}>
           {countries.items.map((country) => (
-            <TableRow
-              key={country.name.common}
-              onClick={() => handleRowClick(country)}
-              hover
-            >
-              <TableCell sx={{ fontSize: 40 }}>
+            <TableRow key={country.name.common} hover>
+              <TableCell
+                sx={{ fontSize: 40 }}
+                onClick={() => handleRowClick(country)}
+              >
                 {Object.values(country.flag)}
               </TableCell>
               <TableCell style={bodyThemeStyle}>
@@ -110,7 +118,11 @@ export const CountriesTable = () => {
               <TableCell style={bodyThemeStyle}>{country.population}</TableCell>
               <TableCell style={bodyThemeStyle}>{country.region}</TableCell>
               <TableCell>
-                <Button variant="contained" style={buttonThemeStyle}>
+                <Button
+                  variant="contained"
+                  style={buttonThemeStyle}
+                  onClick={() => handleAddToCart(country)}
+                >
                   Add
                 </Button>
               </TableCell>

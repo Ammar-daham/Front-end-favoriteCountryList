@@ -7,6 +7,8 @@ export interface countriesState {
   items: Country[]
   isLoading: boolean
   error: ''
+  cartItems: Country[]
+  productQuantity: number
 }
 
 const initialState: countriesState = {
@@ -14,6 +16,8 @@ const initialState: countriesState = {
   items: [],
   isLoading: false,
   error: '',
+  cartItems: [],
+  productQuantity: 0,
 }
 
 export const countriesFetch = createAsyncThunk(
@@ -34,18 +38,29 @@ export const countriesSlice = createSlice({
   initialState,
   reducers: {
     handleSearchBy: (state, action) => {
-      console.log('action: ', action.payload)
       const searchBy = action.payload.toLowerCase()
       const filteredCountries = state.countriesRef.filter((country) => {
         const name = country.name.common.toLowerCase()
         if (name.startsWith(searchBy)) {
-          return country
+          return state.items.push(action.payload)
         }
         return false
       })
       state.items = filteredCountries
     },
+
+    addToCart: (state, action) => {
+      const item = state.cartItems.find(
+        (item) => item.name.common === action.payload.name.common
+      )
+      if (!item) {
+        state.productQuantity = state.productQuantity + 1
+        state.cartItems = [...state.cartItems, action.payload]
+      }
+      state.cartItems = [...state.cartItems]
+    },
   },
+
   extraReducers: (builder) => {
     builder.addCase(countriesFetch.pending, (state, action) => {
       state.isLoading = true
@@ -62,5 +77,5 @@ export const countriesSlice = createSlice({
   },
 })
 
-export const { handleSearchBy } = countriesSlice.actions
+export const { handleSearchBy, addToCart } = countriesSlice.actions
 export default countriesSlice.reducer
