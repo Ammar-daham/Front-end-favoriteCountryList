@@ -28,4 +28,27 @@ const buttonStyle: AppTheme = {
   },
 }
 
-export { buttonStyle, bodyStyle }
+const shoppingBasketStyle: AppTheme = {
+  dark: {
+    background: 'white',
+    color: 'black',
+  },
+  light: {
+    background: 'black',
+    color: 'white',
+  },
+  common: {
+    transition: 'all 1s ease',
+    fontSize: 12,
+    fontWeight: 'bold',
+    height: 15,
+    width: 15,
+    borderRadius: 50,
+    padding: 5,
+    background: 'black',
+    color: 'white',
+    alignItems: 'center',
+  },
+}
+
+export { buttonStyle, bodyStyle, shoppingBasketStyle }

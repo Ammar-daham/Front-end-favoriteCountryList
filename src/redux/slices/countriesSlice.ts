@@ -6,9 +6,10 @@ export interface countriesState {
   countriesRef: Country[]
   items: Country[]
   isLoading: boolean
-  error: ''
+  error: string
   cartItems: Country[]
   productQuantity: number
+  cartQuantity: number
 }
 
 const initialState: countriesState = {
@@ -18,6 +19,7 @@ const initialState: countriesState = {
   error: '',
   cartItems: [],
   productQuantity: 0,
+  cartQuantity: 0,
 }
 
 export const countriesFetch = createAsyncThunk(
@@ -54,7 +56,7 @@ export const countriesSlice = createSlice({
         (item) => item.name.common === action.payload.name.common
       )
       if (!item) {
-        state.productQuantity = state.productQuantity + 1
+        state.cartQuantity = state.cartQuantity + 1
         state.cartItems = [...state.cartItems, action.payload]
       }
       state.cartItems = [...state.cartItems]
