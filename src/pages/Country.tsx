@@ -8,38 +8,10 @@ import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import { AppTheme } from '../context/AppTheme'
+import { buttonStyle, bodyStyle } from '../context/themeSetting'
 
-export default function Product() {
+export default function Country() {
   const { theme } = useContext(ThemeContext)
-
-  const bodyStyle: AppTheme = {
-    dark: {
-      background: '#37474F',
-      color: 'white',
-    },
-    light: {
-      background: '#F5F5F5',
-      color: '#222222',
-    },
-    common: {
-      transition: 'all 1s ease',
-    },
-  }
-
-  const buttonStyle: AppTheme = {
-    dark: {
-      background: '#3f51b5',
-      color: 'white',
-    },
-    light: {
-      background: '#03a9f4',
-      color: 'black',
-    },
-    common: {
-      transition: 'all 1s ease',
-    },
-  }
 
   const buttonThemeStyle = {
     ...buttonStyle.common,

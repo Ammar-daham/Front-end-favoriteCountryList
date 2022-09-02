@@ -1,15 +1,10 @@
 import React, { useEffect, useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  addToCart,
-  countriesFetch,
-  handleSearchBy,
-} from '../redux/slices/countriesSlice'
+import { addToCart, countriesFetch } from '../redux/slices/countriesSlice'
 import { AppDispatch, RootState } from '../redux/store'
-import { AppTheme } from '../context/AppTheme'
 import ThemeContext from '../context/themeProvider'
 import { useHistory } from 'react-router-dom'
-
+import { buttonStyle, bodyStyle } from '../context/themeSetting'
 import {
   Table,
   TableBody,
@@ -17,10 +12,8 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
   Button,
 } from '@mui/material'
-//import { addToCart } from '../redux/slices/cartSlice'
 
 export const CountriesTable = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -28,8 +21,7 @@ export const CountriesTable = () => {
 
   const history = useHistory()
   const handleRowClick = (country: any) => {
-    history.push(`/products/${country.name.common}`)
-    dispatch(handleSearchBy(country.name.common))
+    history.push(`/country/${country.name.common}s`)
   }
 
   const handleAddToCart = (product: object) => {
@@ -42,34 +34,6 @@ export const CountriesTable = () => {
 
   const { theme } = useContext(ThemeContext)
 
-  const bodyStyle: AppTheme = {
-    dark: {
-      background: '#37474F',
-      color: 'white',
-    },
-    light: {
-      background: '#F5F5F5',
-      color: '#222222',
-    },
-    common: {
-      transition: 'all 1s ease',
-    },
-  }
-
-  const buttonStyle: AppTheme = {
-    dark: {
-      background: '#3f51b5',
-      color: 'white',
-    },
-    light: {
-      background: '#03a9f4',
-      color: 'black',
-    },
-    common: {
-      transition: 'all 1s ease',
-    },
-  }
-
   const buttonThemeStyle = {
     ...buttonStyle.common,
     ...(theme === 'light' ? buttonStyle.light : buttonStyle.dark),
@@ -81,7 +45,7 @@ export const CountriesTable = () => {
   }
 
   return (
-    <TableContainer component={Paper} style={bodyThemeStyle}>
+    <TableContainer style={bodyThemeStyle}>
       <Table aria-label="countries">
         <TableHead>
           <TableRow>
@@ -99,7 +63,7 @@ export const CountriesTable = () => {
           {countries.items.map((country) => (
             <TableRow key={country.name.common} hover>
               <TableCell
-                sx={{ fontSize: 40 }}
+                sx={{ fontSize: 50 }}
                 onClick={() => handleRowClick(country)}
               >
                 {Object.values(country.flag)}
