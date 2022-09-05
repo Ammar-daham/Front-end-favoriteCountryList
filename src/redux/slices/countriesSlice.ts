@@ -8,7 +8,6 @@ export interface countriesState {
   isLoading: boolean
   error: string
   cartItems: Country[]
-  productQuantity: number
   cartQuantity: number
 }
 
@@ -18,7 +17,6 @@ const initialState: countriesState = {
   isLoading: false,
   error: '',
   cartItems: [],
-  productQuantity: 0,
   cartQuantity: 0,
 }
 
@@ -52,14 +50,23 @@ export const countriesSlice = createSlice({
     },
 
     addToCart: (state, action) => {
-      const item = state.cartItems.find(
+      const items = state.cartItems.find(
         (item) => item.name.common === action.payload.name.common
       )
-      if (!item) {
+      if (!items) {
         state.cartQuantity = state.cartQuantity + 1
         state.cartItems = [...state.cartItems, action.payload]
       }
       state.cartItems = [...state.cartItems]
+    },
+
+    removeFromCart: (state, action) => {
+      const filteredItems = state.cartItems.filter(
+        (country) => country.name.common !== action.payload.name.common
+      )
+      console.log(filteredItems)
+      state.cartItems = filteredItems
+      state.cartQuantity = state.cartQuantity - 1
     },
   },
 
@@ -79,5 +86,6 @@ export const countriesSlice = createSlice({
   },
 })
 
-export const { handleSearchBy, addToCart } = countriesSlice.actions
+export const { handleSearchBy, addToCart, removeFromCart } =
+  countriesSlice.actions
 export default countriesSlice.reducer

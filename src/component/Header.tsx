@@ -7,7 +7,7 @@ import DarkModeIcon from '@mui/icons-material/DarkMode'
 import MenuIcon from '@mui/icons-material/Menu'
 import SearchAppBar from './Search'
 import { buttonStyle } from '../context/themeSetting'
-import DrawerComponent from './DrawerComponent'
+import ShoppingList from './ShoppingList'
 
 const Header = () => {
   const { theme, setTheme } = useContext(ThemeContext)
@@ -42,7 +42,7 @@ const Header = () => {
           aria-label="menu"
           sx={{ margin: 2 }}
         >
-          <DrawerComponent />
+          <ShoppingList />
         </IconButton>
 
         <DarkModeIcon />

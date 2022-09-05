@@ -48,7 +48,28 @@ const shoppingBasketStyle: AppTheme = {
     background: 'black',
     color: 'white',
     alignItems: 'center',
+    opacity: 0.3,
   },
 }
 
-export { buttonStyle, bodyStyle, shoppingBasketStyle }
+const shoppingListtStyle: AppTheme = {
+  dark: {
+    background: '#37474F',
+    color: 'white',
+  },
+  light: {
+    background: '#F5F5F5',
+    color: '#222222',
+  },
+  common: {
+    transition: 'all 1s ease',
+    fontSize: 12,
+    fontWeight: 'bold',
+    padding: 50,
+    background: 'black',
+    color: 'white',
+    alignItems: 'center',
+  },
+}
+
+export { buttonStyle, bodyStyle, shoppingBasketStyle, shoppingListtStyle }
