@@ -106,6 +106,16 @@ export const countriesSlice = createSlice({
       )
       state.items = sortedPopulation
     },
+
+    sortCountryRegion: (state, action) => {
+      const list = action.payload.items.map((country: object) => {
+        return country
+      })
+      const sortedRegion = list.sort((a: any, b: any) =>
+        a.region > b.region ? 1 : -1
+      )
+      state.items = sortedRegion
+    },
   },
 
   extraReducers: (builder) => {
@@ -132,5 +142,6 @@ export const {
   sortCountryName,
   sortCountryCapital,
   sortCountryPopulaion,
+  sortCountryRegion,
 } = countriesSlice.actions
 export default countriesSlice.reducer

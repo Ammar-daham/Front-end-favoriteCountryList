@@ -6,6 +6,7 @@ import {
   sortCountryCapital,
   sortCountryName,
   sortCountryPopulaion,
+  sortCountryRegion,
 } from '../redux/slices/countriesSlice'
 import { AppDispatch, RootState } from '../redux/store'
 import ThemeContext from '../context/themeProvider'
@@ -46,6 +47,10 @@ export const CountriesTable = () => {
 
   const handlePopulationSorting = () => {
     dispatch(sortCountryPopulaion(countries))
+  }
+
+  const handleRegionSorting = () => {
+    dispatch(sortCountryRegion(countries))
   }
 
   useEffect(() => {
@@ -95,7 +100,15 @@ export const CountriesTable = () => {
                 <ArrowDropUpIcon />
               </IconButton>
             </TableCell>
-            <TableCell style={bodyThemeStyle}>Region</TableCell>
+            <TableCell style={bodyThemeStyle}>
+              Region
+              <IconButton
+                aria-label="menu"
+                onClick={() => handleRegionSorting()}
+              >
+                <ArrowDropUpIcon />
+              </IconButton>
+            </TableCell>
             <TableCell style={bodyThemeStyle}>Actions</TableCell>
           </TableRow>
         </TableHead>
