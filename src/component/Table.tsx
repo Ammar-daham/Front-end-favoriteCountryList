@@ -5,6 +5,7 @@ import {
   countriesFetch,
   sortCountryCapital,
   sortCountryName,
+  sortCountryPopulaion,
 } from '../redux/slices/countriesSlice'
 import { AppDispatch, RootState } from '../redux/store'
 import ThemeContext from '../context/themeProvider'
@@ -41,6 +42,10 @@ export const CountriesTable = () => {
 
   const handleCapitalSorting = () => {
     dispatch(sortCountryCapital(countries))
+  }
+
+  const handlePopulationSorting = () => {
+    dispatch(sortCountryPopulaion(countries))
   }
 
   useEffect(() => {
@@ -81,7 +86,15 @@ export const CountriesTable = () => {
               </IconButton>
             </TableCell>
             <TableCell style={bodyThemeStyle}>Languages</TableCell>
-            <TableCell style={bodyThemeStyle}>Population</TableCell>
+            <TableCell style={bodyThemeStyle}>
+              Population
+              <IconButton
+                aria-label="menu"
+                onClick={() => handlePopulationSorting()}
+              >
+                <ArrowDropUpIcon />
+              </IconButton>
+            </TableCell>
             <TableCell style={bodyThemeStyle}>Region</TableCell>
             <TableCell style={bodyThemeStyle}>Actions</TableCell>
           </TableRow>
