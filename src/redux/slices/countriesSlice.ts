@@ -64,9 +64,17 @@ export const countriesSlice = createSlice({
       const filteredItems = state.cartItems.filter(
         (country) => country.name.common !== action.payload.name.common
       )
-      console.log(filteredItems)
       state.cartItems = filteredItems
-      state.cartQuantity = state.cartQuantity - 1
+      if (state.cartQuantity != 0) state.cartQuantity = state.cartQuantity - 1
+      else state.cartQuantity = 0
+    },
+
+    removeAllCountries: (state, action) => {
+      const filteredItems = state.cartItems.filter(
+        (country) => country === action.payload
+      )
+      state.cartItems = filteredItems
+      state.cartQuantity = 0
     },
   },
 
@@ -86,6 +94,6 @@ export const countriesSlice = createSlice({
   },
 })
 
-export const { handleSearchBy, addToCart, removeFromCart } =
+export const { handleSearchBy, addToCart, removeFromCart, removeAllCountries } =
   countriesSlice.actions
 export default countriesSlice.reducer

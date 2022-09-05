@@ -11,16 +11,23 @@ import {
   buttonStyle,
   shoppingListtStyle,
 } from '../context/themeSetting'
-import { removeFromCart } from '../redux/slices/countriesSlice'
+import {
+  removeFromCart,
+  removeAllCountries,
+} from '../redux/slices/countriesSlice'
 
-const DrawerComponent = () => {
+const ShoppingList = () => {
   const [openDrawer, setOpenDrawer] = useState(false)
 
   const { countries } = useSelector((state: RootState) => state)
   const dispatch = useDispatch<AppDispatch>()
 
-  const handleRemoveFromCart = (product: object) => {
-    dispatch(removeFromCart(product))
+  const handleRemoveFromCart = (country: object) => {
+    dispatch(removeFromCart(country))
+  }
+
+  const handleRemoveAll = (allCountries: object) => {
+    dispatch(removeAllCountries(allCountries))
   }
 
   const { theme } = useContext(ThemeContext)
@@ -61,7 +68,13 @@ const DrawerComponent = () => {
             <Typography variant="h5" className="Heading" style={{}}>
               Shopping Cart
             </Typography>
-            <Typography variant="h6" className="action">
+            <Typography
+              variant="h6"
+              className="action"
+              onClick={() => {
+                handleRemoveAll(countries.cartItems)
+              }}
+            >
               Remove all
             </Typography>
           </div>
@@ -98,4 +111,4 @@ const DrawerComponent = () => {
   )
 }
 
-export default DrawerComponent
+export default ShoppingList
