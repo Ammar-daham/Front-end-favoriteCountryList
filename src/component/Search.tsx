@@ -50,7 +50,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const SearchAppBar = () => {
   const dispatch = useDispatch<AppDispatch>()
-
   const handleChange = (e: any) => {
     dispatch(handleSearchBy(e.target.value))
   }

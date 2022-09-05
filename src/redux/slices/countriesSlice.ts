@@ -65,7 +65,7 @@ export const countriesSlice = createSlice({
         (country) => country.name.common !== action.payload.name.common
       )
       state.cartItems = filteredItems
-      if (state.cartQuantity != 0) state.cartQuantity = state.cartQuantity - 1
+      if (state.cartQuantity !== 0) state.cartQuantity = state.cartQuantity - 1
       else state.cartQuantity = 0
     },
 
@@ -76,10 +76,20 @@ export const countriesSlice = createSlice({
       state.cartItems = filteredItems
       state.cartQuantity = 0
     },
+
+    sortNames: (state, action) => {
+      const list = action.payload.items.map((country: object) => {
+        return country
+      })
+      const sortedCountries = list.sort((a: any, b: any) =>
+        a.name.common > b.name.common ? 1 : -1
+      )
+      state.items = sortedCountries
+    },
   },
 
   extraReducers: (builder) => {
-    builder.addCase(countriesFetch.pending, (state, action) => {
+    builder.addCase(countriesFetch.pending, (state) => {
       state.isLoading = true
     })
     builder.addCase(countriesFetch.fulfilled, (state, action) => {
@@ -87,13 +97,18 @@ export const countriesSlice = createSlice({
       state.countriesRef = action.payload.data
       state.isLoading = false
     })
-    builder.addCase(countriesFetch.rejected, (state, action) => {
+    builder.addCase(countriesFetch.rejected, (state) => {
       console.log('Something went wrong')
       state.isLoading = false
     })
   },
 })
 
-export const { handleSearchBy, addToCart, removeFromCart, removeAllCountries } =
-  countriesSlice.actions
+export const {
+  handleSearchBy,
+  addToCart,
+  removeFromCart,
+  removeAllCountries,
+  sortNames,
+} = countriesSlice.actions
 export default countriesSlice.reducer

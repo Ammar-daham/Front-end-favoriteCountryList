@@ -3,11 +3,10 @@ import ThemeContext from '../context/themeProvider'
 import { Switch, Typography, AppBar, Toolbar, IconButton } from '@mui/material'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
-
-import MenuIcon from '@mui/icons-material/Menu'
 import SearchAppBar from './Search'
 import { buttonStyle } from '../context/themeSetting'
 import ShoppingList from './ShoppingList'
+import globleImg from '../img/global.png'
 
 const Header = () => {
   const { theme, setTheme } = useContext(ThemeContext)
@@ -24,9 +23,7 @@ const Header = () => {
   return (
     <AppBar style={themeStyle} sx={{ padding: 1 }} position="sticky">
       <Toolbar>
-        <IconButton size="large" edge="start" aria-label="menu">
-          <MenuIcon style={themeStyle} />
-        </IconButton>
+        <img src={globleImg} style={{ width: 50 }} alt="globle" />
         <Typography
           variant="h6"
           noWrap

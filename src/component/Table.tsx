@@ -1,6 +1,10 @@
 import React, { useEffect, useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCart, countriesFetch } from '../redux/slices/countriesSlice'
+import {
+  addToCart,
+  countriesFetch,
+  sortNames,
+} from '../redux/slices/countriesSlice'
 import { AppDispatch, RootState } from '../redux/store'
 import ThemeContext from '../context/themeProvider'
 import { useHistory } from 'react-router-dom'
@@ -13,7 +17,9 @@ import {
   TableHead,
   TableRow,
   Button,
+  IconButton,
 } from '@mui/material'
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp'
 
 export const CountriesTable = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -24,8 +30,12 @@ export const CountriesTable = () => {
     history.push(`/country/${country.name.common}s`)
   }
 
-  const handleAddToCart = (product: object) => {
-    dispatch(addToCart(product))
+  const handleAddToCart = (country: object) => {
+    dispatch(addToCart(country))
+  }
+
+  const handleSorting = () => {
+    dispatch(sortNames(countries))
   }
 
   useEffect(() => {
@@ -50,7 +60,12 @@ export const CountriesTable = () => {
         <TableHead>
           <TableRow>
             <TableCell style={bodyThemeStyle}>Flags</TableCell>
-            <TableCell style={bodyThemeStyle}>Name</TableCell>
+            <TableCell style={bodyThemeStyle}>
+              Name
+              <IconButton aria-label="menu" onClick={() => handleSorting()}>
+                <ArrowDropUpIcon />
+              </IconButton>
+            </TableCell>
             <TableCell style={bodyThemeStyle}>Capital</TableCell>
             <TableCell style={bodyThemeStyle}>Languages</TableCell>
             <TableCell style={bodyThemeStyle}>Population</TableCell>
@@ -60,8 +75,8 @@ export const CountriesTable = () => {
         </TableHead>
 
         <TableBody style={bodyThemeStyle}>
-          {countries.items.map((country) => (
-            <TableRow key={country.name.common} hover>
+          {countries.items.map((country, index) => (
+            <TableRow key={index} hover>
               <TableCell
                 sx={{ fontSize: 50 }}
                 onClick={() => handleRowClick(country)}
