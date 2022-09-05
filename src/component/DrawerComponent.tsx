@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
-import Drawer from '@mui/material/Drawer'
+import { Drawer, Button } from '@mui/material'
+
 import MenuIcon from '@mui/icons-material/Menu'
 import ShoppingCartTwoToneIcon from '@mui/icons-material/ShoppingCartTwoTone'
 import { useSelector } from 'react-redux'
@@ -38,6 +39,9 @@ const DrawerComponent = () => {
             <li key={index}>
               {' '}
               {country.flag} {country.name.common}{' '}
+              <Button variant="contained" style={basketThemeStyle}>
+                Remove
+              </Button>
             </li>
           ))}
         </ol>
