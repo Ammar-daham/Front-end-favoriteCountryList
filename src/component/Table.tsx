@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   addToCart,
   countriesFetch,
-  sortNames,
+  sortCountryCapital,
+  sortCountryName,
 } from '../redux/slices/countriesSlice'
 import { AppDispatch, RootState } from '../redux/store'
 import ThemeContext from '../context/themeProvider'
@@ -34,8 +35,12 @@ export const CountriesTable = () => {
     dispatch(addToCart(country))
   }
 
-  const handleSorting = () => {
-    dispatch(sortNames(countries))
+  const handleNameSorting = () => {
+    dispatch(sortCountryName(countries))
+  }
+
+  const handleCapitalSorting = () => {
+    dispatch(sortCountryCapital(countries))
   }
 
   useEffect(() => {
@@ -62,11 +67,19 @@ export const CountriesTable = () => {
             <TableCell style={bodyThemeStyle}>Flags</TableCell>
             <TableCell style={bodyThemeStyle}>
               Name
-              <IconButton aria-label="menu" onClick={() => handleSorting()}>
+              <IconButton aria-label="menu" onClick={() => handleNameSorting()}>
                 <ArrowDropUpIcon />
               </IconButton>
             </TableCell>
-            <TableCell style={bodyThemeStyle}>Capital</TableCell>
+            <TableCell style={bodyThemeStyle}>
+              Capital
+              <IconButton
+                aria-label="menu"
+                onClick={() => handleCapitalSorting()}
+              >
+                <ArrowDropUpIcon />
+              </IconButton>
+            </TableCell>
             <TableCell style={bodyThemeStyle}>Languages</TableCell>
             <TableCell style={bodyThemeStyle}>Population</TableCell>
             <TableCell style={bodyThemeStyle}>Region</TableCell>

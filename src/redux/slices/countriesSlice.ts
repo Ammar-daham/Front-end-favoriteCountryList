@@ -77,7 +77,7 @@ export const countriesSlice = createSlice({
       state.cartQuantity = 0
     },
 
-    sortNames: (state, action) => {
+    sortCountryName: (state, action) => {
       const list = action.payload.items.map((country: object) => {
         return country
       })
@@ -85,6 +85,16 @@ export const countriesSlice = createSlice({
         a.name.common > b.name.common ? 1 : -1
       )
       state.items = sortedCountries
+    },
+
+    sortCountryCapital: (state, action) => {
+      const list = action.payload.items.map((country: object) => {
+        return country
+      })
+      const sortedCapital = list.sort((a: any, b: any) =>
+        a.capital > b.capital ? 1 : -1
+      )
+      state.items = sortedCapital
     },
   },
 
@@ -109,6 +119,7 @@ export const {
   addToCart,
   removeFromCart,
   removeAllCountries,
-  sortNames,
+  sortCountryName,
+  sortCountryCapital,
 } = countriesSlice.actions
 export default countriesSlice.reducer
