@@ -16,7 +16,6 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableContainer,
   TableHead,
   TableRow,
   Button,
@@ -70,84 +69,77 @@ export const CountriesTable = () => {
   }
 
   return (
-    <TableContainer style={bodyThemeStyle}>
-      <Table aria-label="countries">
-        <TableHead>
-          <TableRow>
-            <TableCell style={bodyThemeStyle}>Flags</TableCell>
-            <TableCell style={bodyThemeStyle}>
-              Name
-              <IconButton aria-label="menu" onClick={() => handleNameSorting()}>
-                <ArrowDropUpIcon />
-              </IconButton>
-            </TableCell>
-            <TableCell style={bodyThemeStyle}>
-              Capital
-              <IconButton
-                aria-label="menu"
-                onClick={() => handleCapitalSorting()}
-              >
-                <ArrowDropUpIcon />
-              </IconButton>
-            </TableCell>
-            <TableCell style={bodyThemeStyle}>Languages</TableCell>
-            <TableCell style={bodyThemeStyle}>
-              Population
-              <IconButton
-                aria-label="menu"
-                onClick={() => handlePopulationSorting()}
-              >
-                <ArrowDropUpIcon />
-              </IconButton>
-            </TableCell>
-            <TableCell style={bodyThemeStyle}>
-              Region
-              <IconButton
-                aria-label="menu"
-                onClick={() => handleRegionSorting()}
-              >
-                <ArrowDropUpIcon />
-              </IconButton>
-            </TableCell>
-            <TableCell style={bodyThemeStyle}>Actions</TableCell>
-          </TableRow>
-        </TableHead>
+    <Table style={bodyThemeStyle} stickyHeader aria-label="countries">
+      <TableHead sx={{ background: 'red' }}>
+        <TableRow>
+          <TableCell style={bodyThemeStyle}>Flags</TableCell>
+          <TableCell style={bodyThemeStyle}>
+            Name
+            <IconButton aria-label="menu" onClick={() => handleNameSorting()}>
+              <ArrowDropUpIcon style={bodyThemeStyle} />
+            </IconButton>
+          </TableCell>
+          <TableCell style={bodyThemeStyle}>
+            Capital
+            <IconButton
+              aria-label="menu"
+              onClick={() => handleCapitalSorting()}
+            >
+              <ArrowDropUpIcon style={bodyThemeStyle} />
+            </IconButton>
+          </TableCell>
+          <TableCell style={bodyThemeStyle}>Languages</TableCell>
+          <TableCell style={bodyThemeStyle}>
+            Population
+            <IconButton
+              aria-label="menu"
+              onClick={() => handlePopulationSorting()}
+            >
+              <ArrowDropUpIcon style={bodyThemeStyle} />
+            </IconButton>
+          </TableCell>
+          <TableCell style={bodyThemeStyle}>
+            Region
+            <IconButton aria-label="menu" onClick={() => handleRegionSorting()}>
+              <ArrowDropUpIcon style={bodyThemeStyle} />
+            </IconButton>
+          </TableCell>
+          <TableCell style={bodyThemeStyle}>Actions</TableCell>
+        </TableRow>
+      </TableHead>
 
-        <TableBody style={bodyThemeStyle}>
-          {countries.items.map((country, index) => (
-            <TableRow key={index} hover>
-              <TableCell
-                sx={{ fontSize: 50 }}
-                onClick={() => handleRowClick(country)}
+      <TableBody>
+        {countries.items.map((country, index) => (
+          <TableRow key={index} hover>
+            <TableCell
+              sx={{ fontSize: 50 }}
+              onClick={() => handleRowClick(country)}
+            >
+              {Object.values(country.flag)}
+            </TableCell>
+            <TableCell style={bodyThemeStyle}>{country.name.common}</TableCell>
+            <TableCell style={bodyThemeStyle}>{country.capital[0]}</TableCell>
+            <TableCell style={bodyThemeStyle}>
+              <ul style={{ paddingLeft: 15 }}>
+                {Object.values(country.languages).map((language) => (
+                  <li key={language}>{language}</li>
+                ))}
+              </ul>
+            </TableCell>
+            <TableCell style={bodyThemeStyle}>{country.population}</TableCell>
+            <TableCell style={bodyThemeStyle}>{country.region}</TableCell>
+            <TableCell>
+              <Button
+                variant="contained"
+                style={buttonThemeStyle}
+                onClick={() => handleAddToCart(country)}
               >
-                {Object.values(country.flag)}
-              </TableCell>
-              <TableCell style={bodyThemeStyle}>
-                {country.name.common}
-              </TableCell>
-              <TableCell style={bodyThemeStyle}>{country.capital[0]}</TableCell>
-              <TableCell style={bodyThemeStyle}>
-                <ul style={{ paddingLeft: 15 }}>
-                  {Object.values(country.languages).map((language) => (
-                    <li key={language}>{language}</li>
-                  ))}
-                </ul>
-              </TableCell>
-              <TableCell style={bodyThemeStyle}>{country.population}</TableCell>
-              <TableCell style={bodyThemeStyle}>{country.region}</TableCell>
-              <TableCell>
-                <Button
-                  variant="contained"
-                  style={buttonThemeStyle}
-                  onClick={() => handleAddToCart(country)}
-                >
-                  Add
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+                Add
+              </Button>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   )
 }

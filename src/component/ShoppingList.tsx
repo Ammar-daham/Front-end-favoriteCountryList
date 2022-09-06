@@ -1,5 +1,14 @@
 import React, { useContext, useState } from 'react'
-import { Drawer, Button, Typography } from '@mui/material'
+import {
+  Drawer,
+  Button,
+  Typography,
+  Divider,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+} from '@mui/material'
 
 import MenuIcon from '@mui/icons-material/Menu'
 import ShoppingCartTwoToneIcon from '@mui/icons-material/ShoppingCartTwoTone'
@@ -9,7 +18,7 @@ import ThemeContext from '../context/themeProvider'
 import {
   shoppingBasketStyle,
   buttonStyle,
-  shoppingListtStyle,
+  shoppingListStyle,
 } from '../context/themeSetting'
 import {
   removeFromCart,
@@ -45,8 +54,8 @@ const ShoppingList = () => {
   }
 
   const shopingListThemeStyle = {
-    ...shoppingListtStyle.common,
-    ...(theme === 'light' ? shoppingListtStyle.light : shoppingListtStyle.dark),
+    ...shoppingListStyle.common,
+    ...(theme === 'light' ? shoppingListStyle.light : shoppingListStyle.dark),
   }
 
   return (
@@ -57,33 +66,36 @@ const ShoppingList = () => {
         onClose={() => setOpenDrawer(false)}
       >
         <div style={shopingListThemeStyle}>
-          <div
-            className="Header"
-            style={{
-              margin: 'auto',
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Typography variant="h5" className="Heading" style={{}}>
-              Shopping Cart
-            </Typography>
-            <Typography
-              variant="h6"
-              className="action"
-              onClick={() => {
-                handleRemoveAll(countries.cartItems)
-              }}
-            >
-              Remove all
-            </Typography>
-          </div>
-
-          <ol style={{ padding: 100 }}>
+          <List style={{ width: '100%', maxWidth: '100%', height: '100%' }}>
+            <ListItem>
+              <ListItemText>
+                <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                  Shopping Cart
+                </Typography>
+              </ListItemText>
+              <Button
+                sx={{ marginLeft: '250px' }}
+                variant="contained"
+                style={basketThemeStyle}
+                size="small"
+                onClick={() => {
+                  handleRemoveAll(countries.cartItems)
+                }}
+              >
+                Remove All
+              </Button>
+            </ListItem>
+            <Divider />
             {countries.cartItems.map((country, index) => (
-              <li key={index} style={{ padding: 10 }}>
-                {country.flag} {country.name.common}
+              <ListItem>
+                <ListItemAvatar style={{ fontSize: '50px' }}>
+                  {country.flag}
+                </ListItemAvatar>
+                <ListItemText>
+                  <Typography>{country.name.common}</Typography>
+                </ListItemText>
                 <Button
+                  sx={{ marginLeft: '250px' }}
                   variant="contained"
                   style={basketThemeStyle}
                   size="small"
@@ -93,9 +105,9 @@ const ShoppingList = () => {
                 >
                   Remove
                 </Button>
-              </li>
+              </ListItem>
             ))}
-          </ol>
+          </List>
         </div>
       </Drawer>
 

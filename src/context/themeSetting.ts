@@ -45,31 +45,27 @@ const shoppingBasketStyle: AppTheme = {
     width: 15,
     borderRadius: 50,
     padding: 5,
-    background: 'black',
-    color: 'white',
-    alignItems: 'center',
     opacity: 0.3,
   },
 }
 
-const shoppingListtStyle: AppTheme = {
+const shoppingListStyle: AppTheme = {
   dark: {
     background: '#37474F',
     color: 'white',
   },
   light: {
     background: '#F5F5F5',
-    color: '#222222',
+    color: 'black',
   },
   common: {
     transition: 'all 1s ease',
     fontSize: 12,
     fontWeight: 'bold',
     padding: 50,
-    background: 'black',
-    color: 'white',
     alignItems: 'center',
+    height: '100%',
   },
 }
 
-export { buttonStyle, bodyStyle, shoppingBasketStyle, shoppingListtStyle }
+export { buttonStyle, bodyStyle, shoppingBasketStyle, shoppingListStyle }
