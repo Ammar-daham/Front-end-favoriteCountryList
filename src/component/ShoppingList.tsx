@@ -73,21 +73,23 @@ const ShoppingList = () => {
                   Shopping Cart
                 </Typography>
               </ListItemText>
-              <Button
-                sx={{ marginLeft: '250px' }}
-                variant="contained"
-                style={basketThemeStyle}
-                size="small"
-                onClick={() => {
-                  handleRemoveAll(countries.cartItems)
-                }}
-              >
-                Remove All
-              </Button>
+              {countries.cartItems.length > 0 ? (
+                <Button
+                  sx={{ marginLeft: '250px' }}
+                  variant="contained"
+                  style={basketThemeStyle}
+                  size="small"
+                  onClick={() => {
+                    handleRemoveAll(countries.cartItems)
+                  }}
+                >
+                  Remove All
+                </Button>
+              ) : null}
             </ListItem>
             <Divider />
             {countries.cartItems.map((country, index) => (
-              <ListItem>
+              <ListItem key={index}>
                 <ListItemAvatar style={{ fontSize: '50px' }}>
                   {country.flag}
                 </ListItemAvatar>

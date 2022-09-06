@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
-import { useSelector } from 'react-redux'
-import { RootState } from '../redux/store'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '../redux/store'
 import ThemeContext from '../context/themeProvider'
-
+import { addToCart } from '../redux/slices/countriesSlice'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
@@ -29,13 +29,19 @@ export default function Country() {
     })
   )
 
+  const dispatch = useDispatch<AppDispatch>()
+
+  const handleAddToCart = (country: object) => {
+    dispatch(addToCart(country))
+  }
+
   if (!country) {
     return <div>Country not found</div>
   }
 
   return (
     <>
-      <Card sx={{ minWidth: 275, alignItems: 'center' }} style={bodyThemeStyle}>
+      <Card sx={{ padding: '100px' }} style={bodyThemeStyle}>
         <CardContent>
           <Typography variant="h4" gutterBottom>
             {country.name.common} {country.flag}
@@ -52,11 +58,19 @@ export default function Country() {
           </ul>
         </CardContent>
         <CardActions>
-          <Button size="small" style={buttonThemeStyle}>
+          <Button
+            size="small"
+            style={buttonThemeStyle}
+            onClick={() => handleAddToCart(country)}
+          >
             Add To Card
           </Button>
         </CardActions>
       </Card>
+      <div style={{ textAlign: 'center', padding: 200 }}>
+        <h2>Globle Map</h2>
+        <h4>Coming soon...</h4>
+      </div>
     </>
   )
 }
