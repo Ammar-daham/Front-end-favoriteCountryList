@@ -5,7 +5,7 @@ import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import SearchAppBar from './Search'
 import { buttonStyle } from '../context/themeSetting'
-import ShoppingList from './ShoppingList'
+import FavoriteList from './FavoriteList'
 import globleImg from '../img/global.png'
 
 const Header = () => {
@@ -39,7 +39,7 @@ const Header = () => {
           aria-label="menu"
           sx={{ margin: 2 }}
         >
-          <ShoppingList />
+          <FavoriteList />
         </IconButton>
 
         <DarkModeIcon />

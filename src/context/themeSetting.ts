@@ -28,7 +28,7 @@ const buttonStyle: AppTheme = {
   },
 }
 
-const shoppingBasketStyle: AppTheme = {
+const FavoritIconStyle: AppTheme = {
   dark: {
     background: 'white',
     color: 'black',
@@ -49,7 +49,7 @@ const shoppingBasketStyle: AppTheme = {
   },
 }
 
-const shoppingListStyle: AppTheme = {
+const FavoritListStyle: AppTheme = {
   dark: {
     background: '#37474F',
     color: 'white',
@@ -60,7 +60,6 @@ const shoppingListStyle: AppTheme = {
   },
   common: {
     transition: 'all 1s ease',
-    fontSize: 12,
     fontWeight: 'bold',
     padding: 50,
     alignItems: 'center',
@@ -68,4 +67,26 @@ const shoppingListStyle: AppTheme = {
   },
 }
 
-export { buttonStyle, bodyStyle, shoppingBasketStyle, shoppingListStyle }
+const removeIconStyle: AppTheme = {
+  dark: {
+    background: '#37474F',
+    color: 'white',
+  },
+  light: {
+    background: '#F5F5F5',
+    color: 'black',
+  },
+  common: {
+    transition: 'all 1s ease',
+    cursor: 'pointer',
+    marginLeft: '250px',
+  },
+}
+
+export {
+  buttonStyle,
+  bodyStyle,
+  FavoritIconStyle,
+  FavoritListStyle,
+  removeIconStyle,
+}

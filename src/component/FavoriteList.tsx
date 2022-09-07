@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import {
   Drawer,
-  Button,
   Typography,
   Divider,
   List,
@@ -9,23 +8,24 @@ import {
   ListItemText,
   ListItemAvatar,
 } from '@mui/material'
-
+import DeleteIcon from '@mui/icons-material/Delete'
 import MenuIcon from '@mui/icons-material/Menu'
-import ShoppingCartTwoToneIcon from '@mui/icons-material/ShoppingCartTwoTone'
+import FavoriteIcon from '@mui/icons-material/Favorite'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../redux/store'
 import ThemeContext from '../context/themeProvider'
 import {
-  shoppingBasketStyle,
+  FavoritIconStyle,
   buttonStyle,
-  shoppingListStyle,
+  FavoritListStyle,
+  removeIconStyle,
 } from '../context/themeSetting'
 import {
   removeFromCart,
   removeAllCountries,
 } from '../redux/slices/countriesSlice'
 
-const ShoppingList = () => {
+const FavoriteList = () => {
   const [openDrawer, setOpenDrawer] = useState(false)
 
   const { countries } = useSelector((state: RootState) => state)
@@ -42,10 +42,8 @@ const ShoppingList = () => {
   const { theme } = useContext(ThemeContext)
 
   const lableThemeStyle = {
-    ...shoppingBasketStyle.common,
-    ...(theme === 'light'
-      ? shoppingBasketStyle.light
-      : shoppingBasketStyle.dark),
+    ...FavoritIconStyle.common,
+    ...(theme === 'light' ? FavoritIconStyle.light : FavoritIconStyle.dark),
   }
 
   const basketThemeStyle = {
@@ -54,8 +52,13 @@ const ShoppingList = () => {
   }
 
   const shopingListThemeStyle = {
-    ...shoppingListStyle.common,
-    ...(theme === 'light' ? shoppingListStyle.light : shoppingListStyle.dark),
+    ...FavoritListStyle.common,
+    ...(theme === 'light' ? FavoritListStyle.light : FavoritListStyle.dark),
+  }
+
+  const removeIconThemeStyle = {
+    ...removeIconStyle.common,
+    ...(theme === 'light' ? removeIconStyle.light : removeIconStyle.dark),
   }
 
   return (
@@ -70,21 +73,16 @@ const ShoppingList = () => {
             <ListItem>
               <ListItemText>
                 <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                  Shopping Cart
+                  Favorite List
                 </Typography>
               </ListItemText>
               {countries.cartItems.length > 0 ? (
-                <Button
-                  sx={{ marginLeft: '250px' }}
-                  variant="contained"
-                  style={basketThemeStyle}
-                  size="small"
+                <DeleteIcon
+                  style={removeIconThemeStyle}
                   onClick={() => {
                     handleRemoveAll(countries.cartItems)
                   }}
-                >
-                  Remove All
-                </Button>
+                />
               ) : null}
             </ListItem>
             <Divider />
@@ -96,33 +94,28 @@ const ShoppingList = () => {
                 <ListItemText>
                   <Typography>{country.name.common}</Typography>
                 </ListItemText>
-                <Button
-                  sx={{ marginLeft: '250px' }}
-                  variant="contained"
-                  style={basketThemeStyle}
-                  size="small"
+                <DeleteIcon
+                  style={removeIconThemeStyle}
                   onClick={() => {
                     handleRemoveFromCart(country)
                   }}
-                >
-                  Remove
-                </Button>
+                />
               </ListItem>
             ))}
           </List>
         </div>
       </Drawer>
 
-      <ShoppingCartTwoToneIcon
+      <FavoriteIcon
         onClick={() => setOpenDrawer(!openDrawer)}
         sx={{ marginLeft: 'auto' }}
         style={basketThemeStyle}
       >
         <MenuIcon />
-      </ShoppingCartTwoToneIcon>
+      </FavoriteIcon>
       <span style={lableThemeStyle}>{countries.cartQuantity}</span>
     </React.Fragment>
   )
 }
 
-export default ShoppingList
+export default FavoriteList
