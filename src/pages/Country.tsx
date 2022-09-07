@@ -68,7 +68,7 @@ export default function Country() {
         </CardActions>
       </Card>
       <div style={{ textAlign: 'center', padding: 200 }}>
-        <h2>Globle Map</h2>
+        <h2>Global Map</h2>
         <h4>Coming soon...</h4>
       </div>
     </>
