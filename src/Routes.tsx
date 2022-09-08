@@ -8,7 +8,6 @@ const Routes = () => (
   <Switch>
     <Route exact path="/" component={Home} />
     <Route exact path="/country/:name" component={Country} />
-    <Route exact path="/" />
   </Switch>
 )
 

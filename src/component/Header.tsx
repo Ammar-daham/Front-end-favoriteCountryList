@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import ThemeContext from '../context/themeProvider'
+import { Link } from 'react-router-dom'
 import { Switch, Typography, AppBar, Toolbar, IconButton } from '@mui/material'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
@@ -23,7 +24,10 @@ const Header = () => {
   return (
     <AppBar style={themeStyle} sx={{ padding: 1 }} position="sticky">
       <Toolbar>
-        <img src={globleImg} style={{ width: 50 }} alt="globle" />
+        <Link to={`/`}>
+          <img src={globleImg} style={{ width: 50 }} alt="globle" />
+        </Link>
+
         <Typography
           variant="h6"
           noWrap

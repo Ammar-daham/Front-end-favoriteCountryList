@@ -49,20 +49,24 @@ export default function Country() {
   const map = Object.values(country.maps)[0]
   console.log(map)
   return (
-    <Box sx={{ flexGrow: 1, padding: 10 }} style={bodyThemeStyle}>
+    <Box sx={{ flexGrow: 1, padding: 20 }} style={bodyThemeStyle}>
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <Card
             sx={{
               maxWidth: 345,
-              padding: 5,
-              borderCollapse: 'collapse',
-              borderRadius: '2em',
+              padding: 10,
             }}
             style={cardThemeStyle}
           >
-            <img src={flagImg} alt={country.name.common}></img>
-            <CardContent sx={{ paddingTop: 5 }}>
+            <Grid sx={{ textAlign: 'center' }}>
+              <img
+                src={flagImg}
+                alt={country.name.common}
+                style={{ borderRadius: '1em' }}
+              ></img>
+            </Grid>
+            <CardContent>
               <Typography variant="h4" gutterBottom>
                 {country.name.common}
               </Typography>
@@ -94,7 +98,7 @@ export default function Country() {
           </Card>
         </Grid>
 
-        <Grid item xs={8}>
+        <Grid item xs={8} style={cardThemeStyle}>
           <div style={{ textAlign: 'center', padding: 200 }}>
             <h2>Global Map</h2>
             <h4>Coming soon...</h4>
