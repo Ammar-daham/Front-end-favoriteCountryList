@@ -15,9 +15,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../redux/store'
 import ThemeContext from '../context/themeProvider'
 import {
-  FavoritIconStyle,
+  FavoriteIconStyle,
   buttonStyle,
-  FavoritListStyle,
+  FavoriteListStyle,
   removeIconStyle,
 } from '../context/themeSetting'
 import {
@@ -42,8 +42,8 @@ const FavoriteList = () => {
   const { theme } = useContext(ThemeContext)
 
   const lableThemeStyle = {
-    ...FavoritIconStyle.common,
-    ...(theme === 'light' ? FavoritIconStyle.light : FavoritIconStyle.dark),
+    ...FavoriteIconStyle.common,
+    ...(theme === 'light' ? FavoriteIconStyle.light : FavoriteIconStyle.dark),
   }
 
   const basketThemeStyle = {
@@ -51,9 +51,9 @@ const FavoriteList = () => {
     ...(theme === 'light' ? buttonStyle.light : buttonStyle.dark),
   }
 
-  const shopingListThemeStyle = {
-    ...FavoritListStyle.common,
-    ...(theme === 'light' ? FavoritListStyle.light : FavoritListStyle.dark),
+  const favoriteListThemeStyle = {
+    ...FavoriteListStyle.common,
+    ...(theme === 'light' ? FavoriteListStyle.light : FavoriteListStyle.dark),
   }
 
   const removeIconThemeStyle = {
@@ -68,7 +68,7 @@ const FavoriteList = () => {
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
       >
-        <div style={shopingListThemeStyle}>
+        <div style={favoriteListThemeStyle}>
           <List style={{ width: '100%', maxWidth: '100%', height: '100%' }}>
             <ListItem>
               <ListItemText>

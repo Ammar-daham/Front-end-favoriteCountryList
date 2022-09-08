@@ -2,7 +2,7 @@ import { AppTheme } from './AppTheme'
 
 const bodyStyle: AppTheme = {
   dark: {
-    background: '#37474F',
+    background: '#1F1B24',
     color: 'white',
   },
   light: {
@@ -28,7 +28,7 @@ const buttonStyle: AppTheme = {
   },
 }
 
-const FavoritIconStyle: AppTheme = {
+const FavoriteIconStyle: AppTheme = {
   dark: {
     background: 'white',
     color: 'black',
@@ -49,14 +49,14 @@ const FavoritIconStyle: AppTheme = {
   },
 }
 
-const FavoritListStyle: AppTheme = {
+const FavoriteListStyle: AppTheme = {
   dark: {
-    background: '#37474F',
+    background: '#1F1B24',
     color: 'white',
   },
   light: {
     background: '#F5F5F5',
-    color: 'black',
+    color: '#222222',
   },
   common: {
     transition: 'all 1s ease',
@@ -83,10 +83,25 @@ const removeIconStyle: AppTheme = {
   },
 }
 
+const cardStyle: AppTheme = {
+  dark: {
+    background: '#1F1B24',
+    color: 'white',
+  },
+  light: {
+    background: '#F5F5F5',
+    color: 'black',
+  },
+  common: {
+    transition: 'all 1s ease',
+  },
+}
+
 export {
   buttonStyle,
   bodyStyle,
-  FavoritIconStyle,
-  FavoritListStyle,
+  FavoriteIconStyle,
+  FavoriteListStyle,
   removeIconStyle,
+  cardStyle,
 }

@@ -1,21 +1,27 @@
 import React, { useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../redux/store'
-import ThemeContext from '../context/themeProvider'
 import { addToCart } from '../redux/slices/countriesSlice'
-import Card from '@mui/material/Card'
-import CardActions from '@mui/material/CardActions'
-import CardContent from '@mui/material/CardContent'
-import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
-import { buttonStyle, bodyStyle } from '../context/themeSetting'
+import {
+  Card,
+  CardActions,
+  CardContent,
+  Typography,
+  Box,
+  Grid,
+} from '@mui/material'
+import { bodyStyle, cardStyle } from '../context/themeSetting'
+import { useParams } from 'react-router-dom'
+import IconButton from '@mui/material/IconButton'
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import ThemeContext from '../context/themeProvider'
 
 export default function Country() {
   const { theme } = useContext(ThemeContext)
 
-  const buttonThemeStyle = {
-    ...buttonStyle.common,
-    ...(theme === 'light' ? buttonStyle.light : buttonStyle.dark),
+  const cardThemeStyle = {
+    ...cardStyle.common,
+    ...(theme === 'light' ? cardStyle.light : cardStyle.dark),
   }
 
   const bodyThemeStyle = {
@@ -23,13 +29,13 @@ export default function Country() {
     ...(theme === 'light' ? bodyStyle.light : bodyStyle.dark),
   }
 
-  const country = useSelector((state: RootState) =>
-    state.countries.items.find((p) => {
-      return p
-    })
-  )
-
   const dispatch = useDispatch<AppDispatch>()
+  const { name } = useParams<{ name: string }>()
+
+  const { countries } = useSelector((state: RootState) => state)
+  const country = countries.items.find(
+    (country) => country.name.common === name
+  )
 
   const handleAddToCart = (country: object) => {
     dispatch(addToCart(country))
@@ -39,38 +45,62 @@ export default function Country() {
     return <div>Country not found</div>
   }
 
+  const flagImg = Object.values(country.flags)[0]
+  const map = Object.values(country.maps)[0]
+  console.log(map)
   return (
-    <>
-      <Card sx={{ padding: '100px' }} style={bodyThemeStyle}>
-        <CardContent>
-          <Typography variant="h4" gutterBottom>
-            {country.name.common} {country.flag}
-          </Typography>
-          <Typography>Capital: {country.capital}</Typography>
-          Population: {country.population}
-          <Typography variant="body2">Region: {country.region}</Typography>
-          <Typography variant="body2">Area: {country.area}</Typography>
-          <ul style={{ paddingLeft: 15 }}>
-            <Typography>Languages:</Typography>
-            {Object.values(country.languages).map((language) => (
-              <li key={language}>{language}</li>
-            ))}
-          </ul>
-        </CardContent>
-        <CardActions>
-          <Button
-            size="small"
-            style={buttonThemeStyle}
-            onClick={() => handleAddToCart(country)}
+    <Box sx={{ flexGrow: 1, padding: 10 }} style={bodyThemeStyle}>
+      <Grid container spacing={2}>
+        <Grid item xs={4}>
+          <Card
+            sx={{
+              maxWidth: 345,
+              padding: 5,
+              borderCollapse: 'collapse',
+              borderRadius: '2em',
+            }}
+            style={cardThemeStyle}
           >
-            Add To Card
-          </Button>
-        </CardActions>
-      </Card>
-      <div style={{ textAlign: 'center', padding: 200 }}>
-        <h2>Global Map</h2>
-        <h4>Coming soon...</h4>
-      </div>
-    </>
+            <img src={flagImg} alt={country.name.common}></img>
+            <CardContent sx={{ paddingTop: 5 }}>
+              <Typography variant="h4" gutterBottom>
+                {country.name.common}
+              </Typography>
+              <Typography>Capital: {country.capital}</Typography>
+              <Typography>Population: {country.population}</Typography>
+              <Typography>Region: {country.region}</Typography>
+              <Typography>Area: {country.area} km²</Typography>
+              <Typography>
+                Currency: {Object.values(country.currencies)[0].name}{' '}
+              </Typography>
+
+              <ul style={{ paddingLeft: 15 }}>
+                <Typography>Languages:</Typography>
+                {Object.values(country.languages).map((language) => (
+                  <li key={language}>{language}</li>
+                ))}
+              </ul>
+              <a href={map}>Location on map</a>
+            </CardContent>
+
+            <CardActions disableSpacing>
+              <IconButton
+                aria-label="add to favorites"
+                onClick={() => handleAddToCart(country)}
+              >
+                <FavoriteIcon />
+              </IconButton>
+            </CardActions>
+          </Card>
+        </Grid>
+
+        <Grid item xs={8}>
+          <div style={{ textAlign: 'center', padding: 200 }}>
+            <h2>Global Map</h2>
+            <h4>Coming soon...</h4>
+          </div>
+        </Grid>
+      </Grid>
+    </Box>
   )
 }
