@@ -17,6 +17,17 @@ To run the project, run
 yarn start
 ````
 
+Using docker
+* Pull docker image using this command:
+```bash 
+docker pull ammarfad/fs12-frontend-project 
+```
+
+* Run the container using this command: 
+```bash 
+docker container run --rm -it -p 3000:3000 ammarfad/fs12-frontend-project
+```
+
 <br />
 
 ### Features that come with this template
