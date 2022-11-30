@@ -47,9 +47,10 @@ export default function Country() {
 
   const flagImg = Object.values(country.flags)[0]
   const map = Object.values(country.maps)[0]
+
   console.log(map)
   return (
-    <Box sx={{ flexGrow: 1, padding: 20 }} style={bodyThemeStyle}>
+    <Box sx={{ flexGrow: 1, padding: 5 }} style={bodyThemeStyle}>
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <Card

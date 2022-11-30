@@ -7,7 +7,7 @@ import DarkModeIcon from '@mui/icons-material/DarkMode'
 import SearchAppBar from './Search'
 import { buttonStyle } from '../context/themeSetting'
 import FavoriteList from './FavoriteList'
-import globleImg from '../img/global.png'
+import globalImg from '../img/global.png'
 
 const Header = () => {
   const { theme, setTheme } = useContext(ThemeContext)
@@ -25,7 +25,7 @@ const Header = () => {
     <AppBar style={themeStyle} sx={{ padding: 1 }} position="sticky">
       <Toolbar>
         <Link to={`/`}>
-          <img src={globleImg} style={{ width: 50 }} alt="globle" />
+          <img src={globalImg} style={{ width: 50 }} alt="global" />
         </Link>
 
         <Typography

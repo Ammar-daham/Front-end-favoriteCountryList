@@ -28,6 +28,8 @@ export const CountriesTable = () => {
   const dispatch = useDispatch<AppDispatch>()
   const { countries } = useSelector((state: RootState) => state)
 
+  //const [name, setName] = useState(null)
+
   const handleAddToCart = (country: object) => {
     dispatch(addToCart(country))
   }
