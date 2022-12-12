@@ -9,7 +9,7 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: latest
 
       - name: Checkout code
         uses: actions/checkout@v3
@@ -17,7 +17,7 @@ jobs:
       - name: Setup cache
         uses: actions/cache@v3
         with:
-          key: @{{ runner.os }}--runApp--${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}--runApp--${{ hashFiles('**/package-lock.json') }}
           path: ~/.npm
           restore-key: |
             ${{ runner.os }}--runApp--
