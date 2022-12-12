@@ -1,0 +1,38 @@
+name: Favorite country list
+
+on: [push]
+
+jobs:
+  build: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup cache
+        uses: actions/cache@v3
+        with:
+          key: @{{ runner.os }}--runApp--${{ hashFiles('**/package-lock.json') }}
+          path: ~/.npm
+          restore-key: |
+            ${{ runner.os }}--runApp--
+            ${{ runner.os }}-- 
+
+      - name: Install packages
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Linting
+        run: npm run lint
+
+      - name: Building
+        run: npm run build
+
+      
