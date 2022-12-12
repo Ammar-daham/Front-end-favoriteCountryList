@@ -24,15 +24,15 @@ jobs:
             ${{ runner.os }}-- 
 
       - name: Install packages
-        run: npm install
+        run: yarn install
 
       - name: Run tests
-        run: npm test
+        run: yarn test
 
       - name: Linting
-        run: npm run lint
+        run: yarn run lint
 
       - name: Building
-        run: npm run build
+        run: yarn run build
 
       
