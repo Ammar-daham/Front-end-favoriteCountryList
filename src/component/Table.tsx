@@ -10,7 +10,7 @@ import {
 } from '../redux/slices/countriesSlice'
 import { AppDispatch, RootState } from '../redux/store'
 import ThemeContext from '../context/themeProvider'
-import { useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { buttonStyle, bodyStyle } from '../context/themeSetting'
 import {
   Table,
@@ -20,17 +20,13 @@ import {
   TableRow,
   Button,
   IconButton,
+  Box,
 } from '@mui/material'
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp'
 
 export const CountriesTable = () => {
   const dispatch = useDispatch<AppDispatch>()
   const { countries } = useSelector((state: RootState) => state)
-
-  const history = useHistory()
-  const handleRowClick = (country: any) => {
-    history.push(`/country/${country.name.common}s`)
-  }
 
   const handleAddToCart = (country: object) => {
     dispatch(addToCart(country))
@@ -69,77 +65,93 @@ export const CountriesTable = () => {
   }
 
   return (
-    <Table style={bodyThemeStyle} stickyHeader aria-label="countries">
-      <TableHead sx={{ background: 'red' }}>
-        <TableRow>
-          <TableCell style={bodyThemeStyle}>Flags</TableCell>
-          <TableCell style={bodyThemeStyle}>
-            Name
-            <IconButton aria-label="menu" onClick={() => handleNameSorting()}>
-              <ArrowDropUpIcon style={bodyThemeStyle} />
-            </IconButton>
-          </TableCell>
-          <TableCell style={bodyThemeStyle}>
-            Capital
-            <IconButton
-              aria-label="menu"
-              onClick={() => handleCapitalSorting()}
-            >
-              <ArrowDropUpIcon style={bodyThemeStyle} />
-            </IconButton>
-          </TableCell>
-          <TableCell style={bodyThemeStyle}>Languages</TableCell>
-          <TableCell style={bodyThemeStyle}>
-            Population
-            <IconButton
-              aria-label="menu"
-              onClick={() => handlePopulationSorting()}
-            >
-              <ArrowDropUpIcon style={bodyThemeStyle} />
-            </IconButton>
-          </TableCell>
-          <TableCell style={bodyThemeStyle}>
-            Region
-            <IconButton aria-label="menu" onClick={() => handleRegionSorting()}>
-              <ArrowDropUpIcon style={bodyThemeStyle} />
-            </IconButton>
-          </TableCell>
-          <TableCell style={bodyThemeStyle}>Actions</TableCell>
-        </TableRow>
-      </TableHead>
-
-      <TableBody>
-        {countries.items.map((country, index) => (
-          <TableRow key={index} hover>
-            <TableCell
-              sx={{ fontSize: 50 }}
-              onClick={() => handleRowClick(country)}
-            >
-              {Object.values(country.flag)}
+    <Box sx={{ padding: 15 }} style={bodyThemeStyle}>
+      <Table stickyHeader aria-label="countries">
+        <TableHead>
+          <TableRow>
+            <TableCell style={buttonThemeStyle}>Flags</TableCell>
+            <TableCell style={buttonThemeStyle}>
+              Name
+              <IconButton aria-label="menu" onClick={() => handleNameSorting()}>
+                <ArrowDropUpIcon style={buttonThemeStyle} />
+              </IconButton>
             </TableCell>
-            <TableCell style={bodyThemeStyle}>{country.name.common}</TableCell>
-            <TableCell style={bodyThemeStyle}>{country.capital[0]}</TableCell>
-            <TableCell style={bodyThemeStyle}>
-              <ul style={{ paddingLeft: 15 }}>
-                {Object.values(country.languages).map((language) => (
-                  <li key={language}>{language}</li>
-                ))}
-              </ul>
-            </TableCell>
-            <TableCell style={bodyThemeStyle}>{country.population}</TableCell>
-            <TableCell style={bodyThemeStyle}>{country.region}</TableCell>
-            <TableCell>
-              <Button
-                variant="contained"
-                style={buttonThemeStyle}
-                onClick={() => handleAddToCart(country)}
+            <TableCell style={buttonThemeStyle}>
+              Capital
+              <IconButton
+                aria-label="menu"
+                onClick={() => handleCapitalSorting()}
               >
-                Add
-              </Button>
+                <ArrowDropUpIcon style={buttonThemeStyle} />
+              </IconButton>
             </TableCell>
+            <TableCell style={buttonThemeStyle}>Languages</TableCell>
+            <TableCell style={buttonThemeStyle}>
+              Population
+              <IconButton
+                aria-label="menu"
+                onClick={() => handlePopulationSorting()}
+              >
+                <ArrowDropUpIcon style={buttonThemeStyle} />
+              </IconButton>
+            </TableCell>
+            <TableCell style={buttonThemeStyle}>
+              Region
+              <IconButton
+                aria-label="menu"
+                onClick={() => handleRegionSorting()}
+              >
+                <ArrowDropUpIcon style={buttonThemeStyle} />
+              </IconButton>
+            </TableCell>
+            <TableCell style={buttonThemeStyle}>Actions</TableCell>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHead>
+
+        <TableBody>
+          {countries.items.map((country) => (
+            <TableRow key={country.name.common}>
+              <TableCell sx={{ fontSize: 50 }} style={bodyThemeStyle}>
+                <Link to={`/country/${country.name.common}`}>
+                  {country.flag}
+                </Link>
+              </TableCell>
+              <TableCell style={bodyThemeStyle}>
+                {country.name.common}
+              </TableCell>
+              <TableCell style={bodyThemeStyle}>{country.capital[0]}</TableCell>
+              <TableCell style={bodyThemeStyle}>
+                <ul style={{ paddingLeft: 15 }}>
+                  {Object.values(country.languages).map((language) => (
+                    <li key={language}>{language}</li>
+                  ))}
+                </ul>
+              </TableCell>
+              <TableCell style={bodyThemeStyle}>{country.population}</TableCell>
+              <TableCell style={bodyThemeStyle}>{country.region}</TableCell>
+
+              <TableCell style={bodyThemeStyle}>
+                {!countries.cartItems.includes(country) && (
+                  <Button
+                    variant="contained"
+                    style={buttonThemeStyle}
+                    onClick={() => {
+                      handleAddToCart(country)
+                    }}
+                  >
+                    Add
+                  </Button>
+                )}
+                {countries.cartItems.includes(country) && (
+                  <Button variant="contained" disabled>
+                    Add
+                  </Button>
+                )}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </Box>
   )
 }
