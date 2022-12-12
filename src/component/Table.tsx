@@ -5,7 +5,7 @@ import {
   countriesFetch,
   sortCountryCapital,
   sortCountryName,
-  sortCountryPopulaion,
+  sortCountryPopulation,
   sortCountryRegion,
 } from '../redux/slices/countriesSlice'
 import { AppDispatch, RootState } from '../redux/store'
@@ -28,8 +28,6 @@ export const CountriesTable = () => {
   const dispatch = useDispatch<AppDispatch>()
   const { countries } = useSelector((state: RootState) => state)
 
-  //const [name, setName] = useState(null)
-
   const handleAddToCart = (country: object) => {
     dispatch(addToCart(country))
   }
@@ -43,7 +41,7 @@ export const CountriesTable = () => {
   }
 
   const handlePopulationSorting = () => {
-    dispatch(sortCountryPopulaion(countries))
+    dispatch(sortCountryPopulation(countries))
   }
 
   const handleRegionSorting = () => {
@@ -131,14 +129,24 @@ export const CountriesTable = () => {
               </TableCell>
               <TableCell style={bodyThemeStyle}>{country.population}</TableCell>
               <TableCell style={bodyThemeStyle}>{country.region}</TableCell>
+
               <TableCell style={bodyThemeStyle}>
-                <Button
-                  variant="contained"
-                  style={buttonThemeStyle}
-                  onClick={() => handleAddToCart(country)}
-                >
-                  Add
-                </Button>
+                {!countries.cartItems.includes(country) && (
+                  <Button
+                    variant="contained"
+                    style={buttonThemeStyle}
+                    onClick={() => {
+                      handleAddToCart(country)
+                    }}
+                  >
+                    Add
+                  </Button>
+                )}
+                {countries.cartItems.includes(country) && (
+                  <Button variant="contained" disabled>
+                    Add
+                  </Button>
+                )}
               </TableCell>
             </TableRow>
           ))}

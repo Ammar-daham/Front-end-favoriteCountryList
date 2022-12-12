@@ -96,7 +96,7 @@ export const countriesSlice = createSlice({
       state.items = sortedCapital
     },
 
-    sortCountryPopulaion: (state, action) => {
+    sortCountryPopulation: (state, action) => {
       const list = action.payload.items.map((country: object) => {
         return country
       })
@@ -140,7 +140,7 @@ export const {
   removeAllCountries,
   sortCountryName,
   sortCountryCapital,
-  sortCountryPopulaion,
+  sortCountryPopulation,
   sortCountryRegion,
 } = countriesSlice.actions
 export default countriesSlice.reducer

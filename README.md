@@ -16,7 +16,16 @@ To run the project, run
 ````bash
 yarn start
 ````
+Using docker
+* Pull docker image using this command:
+```bash 
+docker pull ammarfad/fs12-frontend-project 
+```
 
+* Run the container using this command: 
+```bash 
+docker container run --rm -it -p 3000:3000 ammarfad/fs12-frontend-project
+```
 <br />
 
 ### Features that come with this template
@@ -136,3 +145,6 @@ Sending me/Vincent a message saying my app is broken would help **no one**.
 * Can I know my own evaluation?
   * this data is between me and the BD team
   * you can still book 1on1 session with me or send me a DM where I would tell you my opinion of your tech/soft skills.
+
+
+ 
