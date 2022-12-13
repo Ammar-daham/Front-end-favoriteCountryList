@@ -22,7 +22,7 @@ import {
 } from '../context/themeSetting'
 import {
   removeFromCart,
-  removeAllCountries,
+  //removeAllCountries,
 } from '../redux/slices/countriesSlice'
 
 const FavoriteList = () => {
@@ -35,9 +35,9 @@ const FavoriteList = () => {
     dispatch(removeFromCart(country))
   }
 
-  const handleRemoveAll = (allCountries: object) => {
-    dispatch(removeAllCountries(allCountries))
-  }
+  // const handleRemoveAll = (allCountries: object) => {
+  //   dispatch(removeAllCountries(allCountries))
+  // }
 
   const { theme } = useContext(ThemeContext)
 
@@ -76,14 +76,14 @@ const FavoriteList = () => {
                   Favorite List
                 </Typography>
               </ListItemText>
-              {countries.cartItems && countries.cartItems.length > 0 && (
+              {/* {countries.cartItems && countries.cartItems.length > 0 ? (
                 <DeleteIcon
                   style={removeIconThemeStyle}
                   onClick={() => {
                     handleRemoveAll(countries.cartItems)
                   }}
                 />
-              )}
+              ) : null} */}
             </ListItem>
             <Divider style={basketThemeStyle} />
             {countries.cartItems.map((country, index) => (
