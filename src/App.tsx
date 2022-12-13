@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Header from './component/Header'
 import Routes from './Routes'
 import ThemeContext from './context/themeProvider'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import './index.css'
 
@@ -11,8 +12,10 @@ export default function App() {
   return (
     <>
       <ThemeContext.Provider value={{ theme, setTheme }}>
-        <Header />
-        <Routes />
+        <Router>
+          <Header />
+          <Routes />
+        </Router>
       </ThemeContext.Provider>
     </>
   )
