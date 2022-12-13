@@ -76,7 +76,7 @@ const FavoriteList = () => {
                   Favorite List
                 </Typography>
               </ListItemText>
-              {countries.cartItems.length > 0 ? (
+              {countries.cartItems && countries.cartItems.length > 0 ? (
                 <DeleteIcon
                   style={removeIconThemeStyle}
                   onClick={() => {
