@@ -21,7 +21,7 @@ describe('With React Testing Library', () => {
   const mockStore = configureStore()
   let store
 
-  it('Shows "Hello world!"', () => {
+  it('Shows "Countries"', () => {
     store = mockStore(initialState)
     const { getByText } = render(
       <Provider store={store}>
@@ -29,6 +29,6 @@ describe('With React Testing Library', () => {
       </Provider>
     )
 
-    expect(getByText('Hello World!')).not.toBeNull()
+    expect(getByText('Countries')).not.toBeNull()
   })
 })
