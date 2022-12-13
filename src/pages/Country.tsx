@@ -65,7 +65,7 @@ export default function Country() {
 
   console.log(map)
   return (
-    <Box sx={{ flexGrow: 1, padding: 10 }} style={bodyThemeStyle}>
+    <Box sx={{ flexGrow: 1, padding: 5 }} style={bodyThemeStyle}>
       <Grid item xs={12} style={{ display: 'grid', justifyContent: 'center' }}>
         <Card
           sx={{

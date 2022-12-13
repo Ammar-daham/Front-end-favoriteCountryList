@@ -88,7 +88,7 @@ const FavoriteList = () => {
             <Divider style={basketThemeStyle} />
             {countries.cartItems.map((country, index) => (
               <ListItem key={index}>
-                <ListItemAvatar style={{ fontSize: '50px' }}>
+                <ListItemAvatar style={{ fontSize: '30px' }}>
                   {country.flag}
                 </ListItemAvatar>
                 <ListItemText>

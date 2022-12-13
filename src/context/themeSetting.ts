@@ -75,7 +75,7 @@ const FavoriteListStyle: AppTheme = {
   common: {
     transition: 'all 1s ease',
     fontWeight: 'bold',
-    padding: 50,
+    padding: 20,
     alignItems: 'center',
     height: '100%',
   },

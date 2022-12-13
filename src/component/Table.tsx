@@ -133,7 +133,6 @@ export const CountriesTable = () => {
               <TableCell style={bodyThemeStyle}>
                 {!countries.cartItems.includes(country) && (
                   <Button
-                    variant="contained"
                     style={buttonThemeStyle}
                     onClick={() => {
                       handleAddToCart(country)
