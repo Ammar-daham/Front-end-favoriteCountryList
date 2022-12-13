@@ -10,13 +10,13 @@ export default function App() {
   const [theme, setTheme] = useState('light')
 
   return (
-    <>
-      <ThemeContext.Provider value={{ theme, setTheme }}>
-        <Router>
+    <Router>
+      <div>
+        <ThemeContext.Provider value={{ theme, setTheme }}>
           <Header />
           <Routes />
-        </Router>
-      </ThemeContext.Provider>
-    </>
+        </ThemeContext.Provider>
+      </div>
+    </Router>
   )
 }
