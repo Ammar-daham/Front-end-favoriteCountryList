@@ -115,6 +115,21 @@ const cardStyle: AppTheme = {
   },
 }
 
+const linkStyle: AppTheme = {
+  dark: {
+    background: '#292C33',
+    color: 'white',
+  },
+  light: {
+    background: 'white',
+    color: 'black',
+  },
+  common: {
+    transition: 'all 1s ease',
+    textDecoration: 'none',
+  },
+}
+
 export {
   buttonStyle,
   bodyStyle,
@@ -122,5 +137,6 @@ export {
   FavoriteIconStyle1,
   FavoriteListStyle,
   removeIconStyle,
+  linkStyle,
   cardStyle,
 }

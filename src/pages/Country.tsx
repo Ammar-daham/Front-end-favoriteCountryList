@@ -14,6 +14,7 @@ import {
   bodyStyle,
   cardStyle,
   FavoriteIconStyle1,
+  linkStyle,
 } from '../context/themeSetting'
 import { useParams } from 'react-router-dom'
 import IconButton from '@mui/material/IconButton'
@@ -38,6 +39,11 @@ export default function Country() {
     ...(theme === 'light' ? FavoriteIconStyle1.light : FavoriteIconStyle1.dark),
   }
 
+  const linkTextStyle = {
+    ...linkStyle.common,
+    ...(theme === 'light' ? linkStyle.light : linkStyle.dark),
+  }
+
   const dispatch = useDispatch<AppDispatch>()
   const { name } = useParams<{ name: string }>()
 
@@ -60,8 +66,7 @@ export default function Country() {
   console.log(map)
   return (
     <Box sx={{ flexGrow: 1, padding: 10 }} style={bodyThemeStyle}>
-      {/* <Grid container spacing={2}> */}
-      <Grid item xs={12}>
+      <Grid item xs={12} style={{ display: 'grid', justifyContent: 'center' }}>
         <Card
           sx={{
             maxWidth: 400,
@@ -93,11 +98,11 @@ export default function Country() {
                 <li key={language}>{language}</li>
               ))}
             </ul>
-            <a href={map} style={{ textDecoration: 'none' }}>
+            <a href={map} style={linkTextStyle}>
               Location on map
             </a>
           </CardContent>
-          <CardActions disableSpacing>
+          <CardActions disableSpacing style={{ float: 'right' }}>
             {countries.cartItems.includes(country) && (
               <IconButton aria-label="add to favorites" disabled>
                 <FavoriteIcon />
@@ -115,17 +120,6 @@ export default function Country() {
           </CardActions>
         </Card>
       </Grid>
-
-      {/* <Grid item xs={8} style={cardThemeStyle}>
-          <div style={{ textAlign: 'center', padding: 50 }}>
-            <img
-              src={flagImg}
-              alt={country.name.common}
-              style={{ borderRadius: '1em', width:'30rem' }}
-            ></img>
-          </div>
-        </Grid> */}
-      {/* </Grid> */}
     </Box>
   )
 }
