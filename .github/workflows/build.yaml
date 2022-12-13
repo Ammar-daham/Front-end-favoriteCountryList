@@ -33,6 +33,6 @@ jobs:
         run: yarn run lint
 
       - name: Building
-        run: yarn run build
+        run: yarn build
 
       
