@@ -49,6 +49,20 @@ const FavoriteIconStyle: AppTheme = {
   },
 }
 
+const FavoriteIconStyle1: AppTheme = {
+  dark: {
+    background: '#292C33',
+    color: 'white',
+  },
+  light: {
+    background: 'white',
+    color: 'black',
+  },
+  common: {
+    transition: 'all 1s ease',
+  },
+}
+
 const FavoriteListStyle: AppTheme = {
   dark: {
     background: '#121212',
@@ -105,6 +119,7 @@ export {
   buttonStyle,
   bodyStyle,
   FavoriteIconStyle,
+  FavoriteIconStyle1,
   FavoriteListStyle,
   removeIconStyle,
   cardStyle,
