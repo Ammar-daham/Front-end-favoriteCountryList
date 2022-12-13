@@ -76,14 +76,14 @@ const FavoriteList = () => {
                   Favorite List
                 </Typography>
               </ListItemText>
-              {countries.cartItems && countries.cartItems.length > 0 ? (
+              {countries.cartItems && countries.cartItems.length > 0 && (
                 <DeleteIcon
                   style={removeIconThemeStyle}
                   onClick={() => {
                     handleRemoveAll(countries.cartItems)
                   }}
                 />
-              ) : null}
+              )}
             </ListItem>
             <Divider style={basketThemeStyle} />
             {countries.cartItems.map((country, index) => (
